@@ -60,3 +60,7 @@ pg_data/
 *.pid
 *.seed
 *.pid.lock
+
+# Test/Lint cache
+.pytest_cache/
+.ruff_cache/

@@ -197,6 +197,17 @@ localops-copilot/
 └── README.md
 ```
 
+
+### Documentation Map
+
+- `docs/architecture.md`：系统架构与数据流
+- `docs/runbook.md`：启动与排障手册
+- `docs/threat-model.md`：安全威胁模型
+- `docs/ws-protocol.md`：WebSocket 事件协议
+- `docs/openapi.yaml`：OpenAPI 规范（建议作为 API 真源）
+- `docs/api.md`：API 快速摘要
+- `docs/project-audit.md`：项目完成度/文档清晰度/冗余文件审查报告
+
 ### Running Tests
 
 ```bash
