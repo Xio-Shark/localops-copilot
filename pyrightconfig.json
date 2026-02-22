@@ -1,0 +1,6 @@
+{
+  "typeCheckingMode": "off",
+  "reportMissingImports": false,
+  "reportMissingModuleSource": false,
+  "extraPaths": ["apps/api", "apps/worker"]
+}

@@ -1,0 +1,31 @@
+openapi: 3.0.3
+info:
+  title: LocalOps Copilot API
+  version: 0.1.0
+paths:
+  /v1/projects:
+    post:
+      summary: Create project
+    get:
+      summary: List projects
+  /v1/projects/{id}/plans:
+    post:
+      summary: Create plan
+  /v1/projects/{id}/runs:
+    post:
+      summary: Create run in awaiting review
+  /v1/runs/{run_id}:approve:
+    post:
+      summary: Approve and enqueue run
+  /v1/runs/{run_id}:cancel:
+    post:
+      summary: Cancel run
+  /v1/runs/{run_id}:
+    get:
+      summary: Get run detail
+  /v1/projects/{id}/index:build:
+    post:
+      summary: Build keyword index stub
+  /v1/projects/{id}/search:
+    post:
+      summary: Search project

@@ -1,0 +1,28 @@
+{
+  "run_id": 1,
+  "status": "FAILED",
+  "timeline": [
+    {
+      "step_no": 1,
+      "command": "git status",
+      "status": "FAILED",
+      "exit_code": 128,
+      "stdout_path": "/workspace/data/logs/1/1.out",
+      "stderr_path": "/workspace/data/logs/1/1.err"
+    },
+    {
+      "step_no": 2,
+      "command": "pytest -q",
+      "status": "QUEUED",
+      "exit_code": null,
+      "stdout_path": null,
+      "stderr_path": null
+    }
+  ],
+  "sandbox": {
+    "network_default": "none",
+    "cpus": 1,
+    "memory": "512m",
+    "pids_limit": 128
+  }
+}

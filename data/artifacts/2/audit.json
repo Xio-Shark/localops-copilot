@@ -1,0 +1,20 @@
+{
+  "run_id": 2,
+  "status": "FAILED",
+  "timeline": [
+    {
+      "step_no": 1,
+      "command": "rm -rf /",
+      "status": "FAILED",
+      "exit_code": 126,
+      "stdout_path": null,
+      "stderr_path": null
+    }
+  ],
+  "sandbox": {
+    "network_default": "none",
+    "cpus": 1,
+    "memory": "512m",
+    "pids_limit": 128
+  }
+}
