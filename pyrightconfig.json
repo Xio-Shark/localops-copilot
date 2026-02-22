@@ -1,6 +1,42 @@
 {
-  "typeCheckingMode": "off",
-  "reportMissingImports": false,
-  "reportMissingModuleSource": false,
-  "extraPaths": ["apps/api", "apps/worker"]
+  "typeCheckingMode": "basic",
+  "reportMissingImports": true,
+  "reportMissingModuleSource": true,
+  "reportOptionalSubscript": false,
+  "reportOptionalMemberAccess": false,
+  "reportOptionalCall": false,
+  "reportOptionalIterable": false,
+  "reportOptionalContextManager": false,
+  "reportOptionalOperand": false,
+  "reportUntypedFunctionDecorator": false,
+  "reportUntypedClassDecorator": false,
+  "reportUntypedBaseClass": false,
+  "reportUntypedNamedTuple": false,
+  "reportPrivateUsage": false,
+  "reportConstantRedefinition": false,
+  "reportDeprecated": false,
+  "reportDuplicateImport": true,
+  "reportInconsistentConstructor": true,
+  "reportWildcardImportFromLibrary": true,
+  "include": ["apps/api", "apps/worker"],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/tests",
+    "**/.venv",
+    "**/venv"
+  ],
+  "extraPaths": ["apps/api", "apps/worker"],
+  "pythonVersion": "3.12",
+  "pythonPlatform": "Linux",
+  "executionEnvironments": [
+    {
+      "root": "apps/api",
+      "extraPaths": ["apps/api"]
+    },
+    {
+      "root": "apps/worker",
+      "extraPaths": ["apps/worker"]
+    }
+  ]
 }

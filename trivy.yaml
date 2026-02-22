@@ -1,0 +1,44 @@
+# Trivy configuration file
+# https://aquasecurity.github.io/trivy/v0.59/docs/configuration/
+
+# Global options
+cache-dir: ~/.cache/trivy
+quiet: false
+
+# Scan configuration
+scan:
+  scanners:
+    - vuln
+    - misconfig
+    - secret
+  skip-dirs:
+    - apps/web/node_modules
+    - apps/web/.next
+    - "**/__pycache__"
+    - "**/.venv"
+    - "**/venv"
+    - "**/.pytest_cache"
+    - "**/.ruff_cache"
+  skip-files:
+    - "**/*.pyc"
+    - "**/*.pyo"
+
+# Vulnerability database
+vulnerability:
+  type:
+    - os
+    - library
+  severity:
+    - HIGH
+    - CRITICAL
+  ignore-unfixed: true
+
+# Secret detection
+secret:
+  enabled: true
+
+# Report configuration
+report:
+  format: table
+  output: stdout
+  severity: HIGH,CRITICAL
