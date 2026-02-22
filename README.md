@@ -13,6 +13,15 @@ LocalOps Copilot 是一个用于本地运维操作的自动化平台，提供以
 - **实时日志**: WebSocket 推送执行日志
 - **审计追踪**: 完整记录所有操作和产物
 
+### Project Goals
+
+本项目文档和实现围绕以下目标构建：
+
+1. **安全优先**：所有命令在受限 Docker 沙箱中执行，并有策略引擎拦截高危命令。
+2. **可审计**：每次运行必须可追踪，包含状态流转、日志、产物与审计记录。
+3. **人机协作**：通过“计划 → 审批 → 执行”的流程降低误操作风险。
+4. **本地优先**：核心组件可在本地一键拉起，便于开发和离线内网场景部署。
+
 ## Architecture
 
 ```
@@ -95,7 +104,9 @@ PENDING → PLANNED → AWAITING_REVIEW → RUNNING → SUCCEEDED/FAILED/CANCELL
 - Docker 29.2+
 - Docker Compose v5.0+
 - Node.js 20+
-- Python 3.12+
+- Python 3.11+（推荐 3.12+）
+
+> ⚠️ 项目代码使用了 `enum.StrEnum`（Python 3.11+），若使用 Python 3.10 运行测试会在导入阶段失败。
 
 ### Installation
 
@@ -120,6 +131,16 @@ curl http://localhost:3000          # Web UI
 ```
 
 ### Usage
+
+最小可行路径（建议首次按此顺序验证）：
+
+1. 访问 `http://localhost:3000` 并创建项目。
+2. 在 Planner 输入自然语言意图并生成计划。
+3. 创建 Run 后先审批，再执行。
+4. 在 Run Detail 实时查看日志与状态。
+5. 执行完成后检查报告、审计日志和代码差异产物。
+
+详细步骤：
 
 1. **访问 Web UI**: http://localhost:3000
 2. **创建项目**: 输入项目名称和根目录

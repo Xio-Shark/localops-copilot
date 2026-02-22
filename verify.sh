@@ -141,6 +141,16 @@ check_g1() {
 check_g2() {
     print_header "G2 - 测试与回归检查"
 
+    # Python 版本检查（代码使用 StrEnum，需要 Python 3.11+）
+    log_info "检查 Python 版本..."
+    local py_ver
+    py_ver=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")' 2>/dev/null || echo "0.0")
+    if python3 -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 11) else 1)' 2>/dev/null; then
+        log_pass "Python 版本满足要求 ($py_ver)"
+    else
+        log_warn "Python 版本过低 ($py_ver)，运行测试可能失败（需 3.11+）"
+    fi
+
     # G2.1: 测试文件存在
     log_info "检查测试文件..."
     local test_files=$(find apps -path "*/tests/*.py" -type f 2>/dev/null | wc -l)
@@ -162,7 +172,7 @@ check_g2() {
     fi
 
     # G2.3: 集成测试标记
-    if grep -r "@pytest.mark.integration" apps/ 2>/dev/null; then
+    if rg --glob '!**/node_modules/**' "@pytest\.mark\.integration" apps/ >/dev/null 2>&1; then
         log_pass "集成测试标记已配置"
     else
         log_warn "未找到集成测试标记"
@@ -277,11 +287,11 @@ check_g4() {
     # G4.4: 敏感信息检查
     log_info "扫描敏感信息..."
     local issues=0
-    if grep -r "password.*=" apps/api/app/core/config.py 2>/dev/null | grep -v "^#" | grep -q "localops"; then
+    if rg "password.*=" apps/api/app/core/config.py 2>/dev/null | rg -v "^#" | rg -q "localops"; then
         log_warn "config.py 中使用默认密码 (开发环境可接受)"
         ((issues++)) || true
     fi
-    if grep -r "sk-" apps/ 2>/dev/null | grep -v ".pyc"; then
+    if rg --glob '!**/node_modules/**' --glob '!**/.next/**' "sk-" apps/ >/dev/null 2>&1; then
         log_error "可能发现硬编码 API Key"
         ((issues++)) || true
     fi
